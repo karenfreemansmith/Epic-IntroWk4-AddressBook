@@ -34,7 +34,8 @@ function getContacts() {
 //frontend logic
 $(document).ready(function() {
   contacts.forEach(function(contact) {
-    //$("ul#contacts").append("<li><span class='contact'>" + contact.fullName() +"</span></li>");
+    //var objContact=new Contact(contact.firstName, contact.lastName);
+    //$("ul#contacts").append("<li><span class='contact'>" + objContact.fullName() +"</span></li>");
     $("ul#contacts").append("<li><span class='contact'>" + contact.firstName +"</span></li>");
      $(".contact").last().click(function() {
        $("#show-contact").show();
@@ -43,7 +44,8 @@ $(document).ready(function() {
        $(".last-name").text(contact.lastName);
        $("ul#addresses").text("");
        contact.addresses.forEach(function(address) {
-         //$("ul#addresses").append("<li>" + address.fullAddress() + "</ul>");
+         //var newAddress = new Address(inputtedStreet, inputtedCity, inputtedState);
+         //$("ul#addresses").append("<li>" + newAddress.fullAddress() + "</ul>");
          $("ul#addresses").append("<li>" + address.street + ", " + address.city + ", " + address.state + "</ul>");
        });
      });
