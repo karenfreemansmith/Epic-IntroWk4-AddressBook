@@ -15,6 +15,10 @@ function Address(street, city, state) {
   this.state = state;
 }
 
+Address.prototype.fullAddress = function() {
+  return this.street + ", " + this.city + ", " + this.state;
+}
+
 //global variable to maintain contacts
 var contacts=getContacts();
 
@@ -29,12 +33,27 @@ function getContacts() {
 
 //frontend logic
 $(document).ready(function() {
+  contacts.forEach(function(contact) {
+    //$("ul#contacts").append("<li><span class='contact'>" + contact.fullName() +"</span></li>");
+    $("ul#contacts").append("<li><span class='contact'>" + contact.firstName +"</span></li>");
+     $(".contact").last().click(function() {
+       $("#show-contact").show();
+       $("#show-contact h2").text(contact.firstName);
+       $(".first-name").text(contact.firstName);
+       $(".last-name").text(contact.lastName);
+       $("ul#addresses").text("");
+       contact.addresses.forEach(function(address) {
+         //$("ul#addresses").append("<li>" + address.fullAddress() + "</ul>");
+         $("ul#addresses").append("<li>" + address.street + ", " + address.city + ", " + address.state + "</ul>");
+       });
+     });
+  });
+
   $("#save-contacts").click(function() {
     localStorage.setItem("myContacts", JSON.stringify(contacts));
   });
 
   $("#add-address").click(function() {
-    alert("adding new address fields");
     $("#new-addresses").append(
       '<div class="new-address">' +
         '<div class="form-group">' +
@@ -74,7 +93,7 @@ $(document).ready(function() {
       $(".last-name").text(newContact.lastName);
       $("ul#addresses").text("");
       newContact.addresses.forEach(function(address) {
-        $("ul#addresses").append("<li>" + address.street + ", " + address.city + ", " + address.state + "</ul>");
+        $("ul#addresses").append("<li>" + address.fullAddress() + "</ul>");
       });
     });
 
