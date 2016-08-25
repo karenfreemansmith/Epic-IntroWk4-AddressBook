@@ -34,16 +34,17 @@ function getContacts() {
 //frontend logic
 $(document).ready(function() {
   contacts.forEach(function(contact) {
-    //$("ul#contacts").append("<li><span class='contact'>" + contact.fullName() +"</span></li>");
-    $("ul#contacts").append("<li><span class='contact'>" + contact.firstName +"</span></li>");
+    var newContact = new Contact(contact.firstName, contact.lastName);
+    $("ul#contacts").append("<li><span class='contact'>" + newContact.fullName() +"</span></li>");
      $(".contact").last().click(function() {
        $("#show-contact").show();
-       $("#show-contact h2").text(contact.firstName);
+       $("#show-contact h2").text(newContact.firstName);
        $(".first-name").text(contact.firstName);
        $(".last-name").text(contact.lastName);
        $("ul#addresses").text("");
        contact.addresses.forEach(function(address) {
-         //$("ul#addresses").append("<li>" + address.fullAddress() + "</ul>");
+         //var newAddress(address.street, address.city, address.state);
+         //$("ul#addresses").append("<li>" + newAddress.fullAddress() + "</ul>");
          $("ul#addresses").append("<li>" + address.street + ", " + address.city + ", " + address.state + "</ul>");
        });
      });
